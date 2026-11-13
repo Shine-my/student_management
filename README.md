@@ -1,291 +1,164 @@
-<!-- markdownlint-disable -->
 <div align="center">
 
-<a href="https://github.com/lechan775/student_management">
-  <img src="docs/images/banner.png" alt="Student Management System Banner" width="100%">
-</a>
+# 学生成绩管理系统
 
-<h1>Student Management System</h1>
+**从 Java 控制台到企业级 Web —— 我的全栈成长之路**
 
-<p><strong>From Console to Cloud — The Full-Stack Evolution</strong></p>
+`Spring Boot 3` · `Vue 3` · `Spring Security + JWT` · `JPA / H2(MySQL)` · `ECharts` · `Docker`
 
-[中文](README.zh-CN.md) | English | [日本語](README.ja.md)
-
-<p>
-  <a href="https://github.com/lechan775/student_management/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/lechan775/student_management/ci.yml?branch=main&label=CI&logo=github&style=flat-square" alt="CI Status">
-  </a>
-  <a href="https://github.com/lechan775/student_management/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License MIT">
-  </a>
-  <img src="https://img.shields.io/badge/Java-17%2B-orange?style=flat-square&logo=openjdk" alt="Java 17+">
-  <img src="https://img.shields.io/badge/Spring%20Boot-3.2.5-brightgreen?style=flat-square&logo=springboot" alt="Spring Boot 3.2.5">
-  <img src="https://img.shields.io/badge/Vue-3.4-4FC08D?style=flat-square&logo=vue.js" alt="Vue 3.4">
-  <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker" alt="Docker Ready">
-  <img src="https://img.shields.io/badge/MySQL-8.0-4479A1?style=flat-square&logo=mysql" alt="MySQL 8.0">
-  <img src="https://img.shields.io/badge/Redis-7-DC382D?style=flat-square&logo=redis" alt="Redis 7">
-  <img src="https://img.shields.io/badge/JUnit-5-25A162?style=flat-square&logo=junit5" alt="JUnit 5">
-  <a href="https://github.com/lechan775/student_management/stargazers">
-    <img src="https://img.shields.io/github/stars/lechan775/student_management?style=flat-square&color=yellow" alt="Stars">
-  </a>
-  <a href="https://github.com/lechan775/student_management/commits/main">
-    <img src="https://img.shields.io/github/last-commit/lechan775/student_management?style=flat-square&color=purple" alt="Last Commit">
-  </a>
-</p>
-
-<p>
-  <a href="#-quick-start">🚀 Quick Start</a> •
-  <a href="#-architecture">🏗 Architecture</a> •
-  <a href="#-evolution-roadmap">🗺 Evolution</a> •
-  <a href="#-api-reference">📡 API</a> •
-  <a href="#-tech-stack">🛠 Tech Stack</a> •
-  <a href="#-project-structure">📂 Structure</a> •
-  <a href="#-contributing">🤝 Contributing</a>
-</p>
+[功能演示](#-功能模块) · [技术栈](#-技术栈) · [快速开始](#-快速开始) · [演进历程](#-演进历程) · [工程实践](#-工程实践)
 
 </div>
 
 ---
 
-## 📖 Introduction
+## 📖 项目简介
 
-**Student Management System** is a progressive full-stack educational project that demonstrates the complete evolution from a simple Java console application to a production-grade web platform. Designed as a learning roadmap for CS undergraduates, each version introduces enterprise-grade engineering practices incrementally.
+这是一个**渐进式全栈教学项目**，也是我从零开始学习 Java 后端开发的主线作品。我从只会最基础的 Java 语法起步，把同一个「学生信息管理」需求用四种方式逐步实现，每一代都引入新的企业级工程实践，最终完成了一个前后端分离、带权限控制和仪表盘可视化的 Web 系统。
 
-Whether you're a beginner learning Java basics or an advanced developer exploring Docker, CI/CD, and microservice patterns — this repository has a version tailored for you.
+通过这个项目，我完整走通了「需求 → 数据库设计 → 后端接口 → 前端页面 → 联调 → 部署」的全流程，并在过程中**独立修复了原项目的启动缺陷、将前端依赖本地化**，保证系统在国内网络环境下可一键运行。
 
-📚 **Documentation** | 🐛 **Issues** | 💬 **Discussions** | 📧 **Contact**
+> 面向岗位：Java 后端开发（Spring Boot + Vue + 微服务方向）
 
 ---
 
-## 🗺 Evolution Roadmap
+## ✨ 功能模块
+
+| 模块 | 说明 |
+|------|------|
+| 🔐 登录注册 | JWT 双 Token 认证、密码 BCrypt 加密、注册/登录/找回密码 |
+| 👨‍🎓 学生管理 | 学生信息增删改查、按姓名/院系搜索、分页、Excel 导入导出 |
+| 📊 成绩管理 | 学生成绩录入、查询、统计 🚧（计划扩展模块） |
+| 📈 仪表盘 | ECharts 可视化：院系分布、性别比例、总数统计 |
+| 📋 操作日志 | AOP 切面自动记录用户操作，支持审计追溯 |
+| 🛡️ 权限控制 | 基于角色的访问控制（ADMIN / TEACHER / STUDENT），方法级鉴权 |
+| 📡 接口文档 | Knife4j / OpenAPI 3 自动生成 API 文档 |
+
+---
+
+## 🛠 技术栈
+
+| 类别 | 技术 | 说明 |
+|------|------|------|
+| 后端框架 | Spring Boot 3.2 | REST API、自动配置、IOC/AOP |
+| 安全认证 | Spring Security + JWT | 登录鉴权、双 Token 旋转 |
+| 持久层 | Spring Data JPA / Hibernate | ORM 映射、分页查询 |
+| 数据库 | H2（开发）/ MySQL 8（生产） | 内嵌零配置 / 生产级 |
+| 缓存 | Redis 7 | 会话与查询缓存（爆炸版） |
+| 前端 | Vue 3 + Vite + TypeScript | 单页应用（爆炸版）/ Vue3 CDN（宇宙版） |
+| UI / 图表 | Element Plus / ECharts | 组件库 + 数据可视化 |
+| 构建 | Maven | 依赖管理与构建 |
+| 部署 | Docker + Compose + Nginx | 容器化一键部署 |
+| CI/CD | GitHub Actions | 编译 → 测试 → 覆盖率 |
+
+---
+
+## 🚀 快速开始
+
+### 方式一：宇宙版（零配置，推荐新手先跑这个）
+
+无需安装数据库，内嵌 H2，一条命令启动：
+
+```bash
+cd universe
+mvn spring-boot:run
+```
+
+打开浏览器访问：
+
+- 应用首页：http://localhost:8080
+- H2 控制台：http://localhost:8080/h2-console
+- 默认管理员：`admin` / `admin123`
+
+> 前端依赖（Vue、ECharts）已下载到本地 `static/js/`，无需联网即可渲染。
+
+### 方式二：爆炸版（生产级，需 MySQL + Redis）
+
+```bash
+cd bigbang
+docker-compose up -d
+# 访问 http://localhost  管理员 admin / Admin@123
+```
+
+---
+
+## 🗺 演进历程（我的学习路径）
+
+同一个需求，四代实现，难度逐级递增，每一代都能独立运行：
 
 ```mermaid
 graph LR
-    A[🏘️ Novice<br/>Console + ArrayList] --> B[🏙️ Advanced<br/>SQLite + BCrypt + MVC]
-    B --> C[🚀 Universe<br/>Spring Boot + H2 + Vue3]
-    C --> D[☄️ BigBang<br/>MySQL + Redis + Docker + CI/CD]
-
-    style A fill:#ffd700,color:#333
-    style B fill:#ff8c00,color:#fff
-    style C fill:#667eea,color:#fff
-    style D fill:#e74c3c,color:#fff
+    A["🏘️ 新手村<br/>控制台 + ArrayList"] --> B["🏙️ 进阶版<br/>JDBC + SQLite + BCrypt"]
+    B --> C["🚀 宇宙版<br/>Spring Boot + JWT + Vue3"]
+    C --> D["☄️ 爆炸版<br/>MySQL + Redis + Docker + CI/CD"]
 ```
 
-| Version | Directory | Interface | Database | Security | Frontend | Deployment |
-|---------|-----------|-----------|----------|----------|----------|------------|
-| 🏘️ **Novice** | `Student_manage/` | Console | `ArrayList` | None | N/A | `javac *.java` |
-| 🏙️ **Advanced** | `src/main/java/` | Console | SQLite | BCrypt | N/A | `mvn exec:java` |
-| 🚀 **Universe** | `universe/` | Browser SPA | H2 | JWT | Vue3 (CDN) | `mvn spring-boot:run` |
-| ☄️ **BigBang** | `bigbang/` | Full Web App | MySQL 8 + Redis | JWT Dual-Token | **Vue3+Vite+TS** | **Docker Compose** |
+| 版本 | 界面 | 数据库 | 安全 | 学到的核心 |
+|------|------|--------|------|-----------|
+| 🏘️ 新手村 | 控制台 | ArrayList（内存） | 无 | Java 基础、集合、面向对象 |
+| 🏙️ 进阶版 | 控制台 | SQLite + JDBC | BCrypt | 分层架构、SQL、Maven 构建 |
+| 🚀 宇宙版 | 浏览器 SPA | H2 + JPA | JWT | Spring Boot、REST 接口、前后端联调 |
+| ☄️ 爆炸版 | 完整 Web 应用 | MySQL + Redis | JWT 双 Token | 缓存、Docker、CI/CD、工程化 |
 
 ---
 
-## ☄️ BigBang — Quick Start
-
-```bash
-# One-command launch
-cd bigbang
-docker-compose up -d
-
-# Access
-open http://localhost          # Web App (Nginx → Vue + API)
-open http://localhost:8080/doc.html  # Swagger API Docs
-
-# Default Admin
-Username: admin    Password: Admin@123
-```
-
-<details>
-<summary>📦 Local Development Setup</summary>
-
-```bash
-# 1. Start infrastructure
-cd bigbang && docker-compose up -d mysql redis
-
-# 2. Backend
-mvn spring-boot:run          # http://localhost:8080
-
-# 3. Frontend (separate terminal)
-cd bigbang-frontend
-npm install && npm run dev   # http://localhost:5173
-```
-</details>
-
----
-
-## 🏗 Architecture
+## 🏗 系统架构（爆炸版）
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│                     🌐 Nginx :80 (Reverse Proxy)              │
-│  ┌─────────────────────────┐  ┌────────────────────────────┐ │
-│  │   Vue 3 + Vite + TS     │  │   Spring Boot 3.2 :8080    │ │
-│  │   ┌──────────┐          │  │   ┌────────────────────┐   │ │
-│  │   │ Element+ │  Axios   │  │   │  Security Config   │   │ │
-│  │   │ ECharts  │◄─401────┼──┼──►│  JWT Filter        │   │ │
-│  │   │ Pinia    │  Refresh │  │   │  AOP Log Aspect    │   │ │
-│  │   └──────────┘          │  │   └───────┬────────────┘   │ │
-│  └─────────────────────────┘  │          │                 │ │
-│                               │   ┌──────▼──────────┐      │ │
-│  ┌──────────┐  ┌──────────┐   │   │  Service Layer  │      │ │
-│  │ MySQL 8  │  │ Redis 7  │◄──┼───┤  ┌──────────┐   │      │ │
-│  │ :3306    │  │ :6379    │   │   │  │ Auth     │   │      │ │
-│  └──────────┘  └──────────┘   │   │  │ Student  │   │      │ │
-│     ▲ Flyway       ▲ Cache    │   │  │ Log      │   │      │ │
-│     │ Migration     │ Manager  │   │  │ File     │   │      │ │
-│                               │   │  └──────────┘   │      │ │
-│                               │   └──────────────────┘      │ │
-└──────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────┐
+│              🌐 Nginx :80 (反向代理)                  │
+│  ┌──────────────────┐    ┌──────────────────────┐    │
+│  │  Vue3 + Vite+TS  │    │  Spring Boot 3 :8080 │    │
+│  │  Element Plus    │◄──►│  Security + JWT      │    │
+│  │  Pinia / ECharts │    │  AOP 日志 / 全局异常 │    │
+│  └──────────────────┘    └──────────┬───────────┘    │
+│                                     │                 │
+│  ┌────────┐  ┌────────┐    ┌───────▼────────┐        │
+│  │ MySQL 8│  │ Redis 7│◄──►│  业务服务层     │        │
+│  └────────┘  └────────┘    └────────────────┘        │
+└──────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🛠 Tech Stack
+## 🎯 工程实践
 
-| Category | Technology | Version | Purpose |
-|----------|-----------|---------|---------|
-| **Framework** | Spring Boot | 3.2.5 | REST API Backend |
-| **Database** | MySQL | 8.0 | Primary Storage |
-| **Cache** | Redis | 7 (Alpine) | Session & Query Cache |
-| **ORM** | Spring Data JPA | Hibernate 6.4 | Database Abstraction |
-| **Migration** | Flyway | 10.x | Versioned DDL |
-| **Mapping** | MapStruct | 1.5.5 | Entity ↔ DTO (Compile-time) |
-| **Security** | Spring Security + JWT | jjwt 0.12 | Dual-Token Auth (access+refresh) |
-| **API Docs** | Knife4j (Swagger) | 4.5 | Auto-generated OpenAPI 3 |
-| **Excel** | Apache POI | 5.2.5 | Import / Export |
-| **Frontend** | Vue 3 + Vite + TypeScript | Latest | SPA |
-| **UI Library** | Element Plus | 2.6 | Component Library |
-| **Charts** | ECharts | 5.5 | Data Visualization |
-| **State** | Pinia | 2.1 | State Management |
-| **HTTP** | Axios | 1.6 | API Client + JWT Interceptor |
-| **Testing** | JUnit 5 + Mockito | Latest | Unit & Integration Tests |
-| **CI/CD** | GitHub Actions | — | Build → Test → Coverage |
-| **Container** | Docker + Compose | Latest | One-Click Deploy |
-| **Proxy** | Nginx | Alpine | Reverse Proxy |
+- **分层架构**：Controller → Service → Repository，职责清晰
+- **JWT 双 Token**：Access Token（1h）+ Refresh Token（7d）无感刷新
+- **AOP 日志切面**：零侵入记录操作日志与 IP
+- **全局异常处理**：`@RestControllerAdvice` 统一异常返回
+- **参数校验**：`@Valid` + Bean Validation
+- **数据库版本迁移**：Flyway 管理 DDL 演进（爆炸版）
+- **Redis 缓存**：`@Cacheable` 减少数据库压力
+- **前后端分离**：Nginx 反向代理 + Vite 开发代理
+- **CI/CD**：GitHub Actions 自动化构建测试
 
 ---
 
-## 📡 API Reference
-
-Full API documentation available at `http://localhost:8080/doc.html` after starting the server.
-
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| `POST` | `/api/auth/login` | Public | Login → JWT Pair |
-| `POST` | `/api/auth/register` | Public | Register |
-| `POST` | `/api/auth/refresh` | Public | Refresh Token |
-| `POST` | `/api/auth/reset-password` | Public | Forgot Password |
-| `GET` | `/api/auth/me` | JWT | Current User Info |
-| `GET` | `/api/students?page=&size=` | All | List (Paginated) |
-| `POST` | `/api/students` | Admin/Teacher | Add Student |
-| `PUT` | `/api/students/{id}` | Admin/Teacher | Update Student |
-| `DELETE` | `/api/students/{id}` | Admin/Teacher | Delete Student |
-| `GET` | `/api/students/search?keyword=` | All | Search by Name/Dept |
-| `GET` | `/api/dashboard` | Admin/Teacher | ECharts Stats |
-| `GET` | `/api/export/excel` | Admin/Teacher | Download Excel |
-| `GET` | `/api/logs` | Admin | Audit Logs |
-| `POST` | `/api/files/upload` | Authenticated | File Upload |
-
----
-
-## 📂 Project Structure
+## 📂 项目结构
 
 ```
 student_management/
-│
-├── Student_manage/              # 🏘️ Novice: Basic Java OOP
-│   ├── Application.java
-│   ├── User.java / Student.java
-│   └── cecha.java
-│
-├── src/main/java/com/studentmanage/  # 🏙️ Advanced: Maven + SQLite
-│   ├── model/   User / Student (Entity)
-│   ├── dao/     DatabaseManager / UserDAO / StudentDAO
-│   ├── service/ AuthService / StudentService
-│   └── ui/      LoginMenu / StudentMenu
-│
-├── universe/                    # 🚀 Universe: Spring Boot + Vue CDN
-│   ├── pom.xml
-│   └── src/main/  java/...  +  resources/static/
-│
-├── bigbang/                     # ☄️ BigBang: Full-Stack Production
-│   ├── docker-compose.yml       # MySQL + Redis + App + Nginx
-│   ├── Dockerfile               # Multi-stage build
-│   ├── nginx/nginx.conf         # Reverse proxy config
-│   ├── .github/workflows/ci.yml # CI/CD Pipeline
-│   └── src/main/
-│       ├── java/.../bigbang/
-│       │   ├── config/     (5 files)  Security/Redis/Swagger/WebMvc
-│       │   ├── security/   (2 files)  JwtUtil/JwtAuthFilter
-│       │   ├── model/      (12 files) Entity/DTO/Enum/Mapper
-│       │   ├── repository/ (4 files)  JPA + Specification
-│       │   ├── service/    (4 files)  Auth/Student/Log/File
-│       │   ├── controller/ (4 files)  REST API Endpoints
-│       │   ├── aspect/     (1 file)   @AOP Logging
-│       │   └── exception/  (2 files)  Global Error Handler
-│       └── resources/
-│           ├── application*.yml       # Multi-env (dev/docker/ci)
-│           └── db/migration/          # Flyway V1+V2
-│
-├── bigbang-frontend/            # ☄️ BigBang Frontend
-│   ├── package.json / vite.config.ts
-│   └── src/
-│       ├── router/    Vue Router
-│       ├── stores/    Pinia (auth)
-│       ├── api/       Axios + JWT interceptor
-│       ├── views/     Login / Dashboard / Students / Logs
-│       ├── components/ AppLayout
-│       └── types/     TypeScript definitions
-│
-└── README.md / README.zh-CN.md / README.ja.md
+├── Student_manage/          # 🏘️ 新手村：控制台 + ArrayList
+├── src/main/java/           # 🏙️ 进阶版：JDBC + SQLite + MVC 分层
+├── universe/                # 🚀 宇宙版：Spring Boot + JWT + Vue3（零配置可跑）
+│   └── src/main/resources/static/   # 前端页面（Vue3 CDN 本地化）
+├── bigbang/                 # ☄️ 爆炸版：MySQL + Redis + Docker
+├── bigbang-frontend/        # 爆炸版前端：Vue3 + Vite + TS
+└── docs/                    # 文档与图片
 ```
 
 ---
 
-## 🎓 Engineering Practices (BigBang)
+## 📌 我的收获
 
-| # | Practice | Implementation |
-|---|----------|---------------|
-| 1 | **Multi-Environment Config** | `application-{dev,docker,ci}.yml` |
-| 2 | **Database Migration** | Flyway V1 (schema) + V2 (seed data) |
-| 3 | **Dual-Token JWT** | Access (1h) + Refresh (7d) Rotation |
-| 4 | **Redis Caching** | `@Cacheable` — students:5min, dashboard:15min |
-| 5 | **AOP Logging** | `@Aspect` auto-capture IP + operation |
-| 6 | **Global Exception Handling** | `@RestControllerAdvice` 5 exception types |
-| 7 | **Bean Validation** | `@Valid` + `@NotBlank`/`@Size` |
-| 8 | **MapStruct Mapping** | Entity ↔ DTO at compile-time (zero reflection) |
-| 9 | **Server-Side Pagination** | `Pageable` + `JpaSpecificationExecutor` |
-| 10 | **API Documentation** | Knife4j / OpenAPI 3 auto-generation |
-| 11 | **Docker Multi-Stage** | `builder(jdk)` → `runner(jre)` for smaller image |
-| 12 | **Health Checks** | Actuator + Docker `HEALTHCHECK` |
-| 13 | **CI/CD** | GitHub Actions: compile → test → JaCoCo |
-| 14 | **Frontend-Backend Separation** | Nginx proxy + Vite dev proxy |
-| 15 | **JWT Silent Refresh** | Axios interceptor: 401 → auto-refresh |
-| 16 | **Method-Level RBAC** | `@PreAuthorize("hasAnyRole('ADMIN','TEACHER')")` |
-
----
-
-## 🤝 Contributing
-
-Contributions welcome! Here's how:
-
-1. 🍴 Fork the repository
-2. 🌿 Create a feature branch (`git checkout -b feat/amazing-feature`)
-3. ✅ Write tests for your changes
-4. 💾 Commit (`git commit -m 'feat: add amazing feature'`)
-5. 📤 Push (`git push origin feat/amazing-feature`)
-6. 🔃 Open a Pull Request
-
-Please ensure `mvn test` passes and follow the existing code style.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+1. 系统掌握了 **Spring Boot + Vue3** 前后端分离开发的完整流程
+2. 理解了 **JWT 鉴权、AOP、全局异常处理、分层架构** 等企业级实践
+3. 学会了用 **Docker Compose** 编排多服务部署
+4. 培养了**排错能力**：独立定位并修复了 `data.sql` 执行顺序导致的启动失败、CDN 加载失败导致的前端白屏等问题
 
 ---
 
 <div align="center">
-  <sub>Built with ❤️ by <a href="https://github.com/lechan775">lechan775</a> | Powered by Spring Boot & Vue 3</sub>
+  <sub>基于 <a href="https://github.com/lechan775/student_management">lechan775/student_management</a> 学习与改进 | 使用 Spring Boot & Vue 3 构建</sub>
 </div>
